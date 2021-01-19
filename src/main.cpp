@@ -1,9 +1,9 @@
 //  Copyright 2020 GHA created by Klykov Anton
 
-#include "postfix.h"
-
 #include <iostream>
 #include <string>
+
+#include "postfix.h"
 
 int main() {
     std::string inf = "2 + 6 * 3 / (4 - 2)";
