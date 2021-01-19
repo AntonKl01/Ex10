@@ -4,13 +4,8 @@
 #define INCLUDE_POSTFIX_H_
 
 #include <iostream>
-
-enum Prioirty {
-    open = 0,
-    close = 1,
-    plusm = 2,
-    multd = 3,
-};
+#include <cstring>
+#include <string>
 
 std::string infix2postfix(std::string _str);
 

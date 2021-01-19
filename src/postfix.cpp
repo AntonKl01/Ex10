@@ -2,6 +2,7 @@
 
 #include "postfix.h"
 #include "MyStack.h"
+
 #include <cstring>
 #include <string>
 
@@ -11,25 +12,25 @@ std::string infix2postfix(std::string _str) {
     std::string _fix;
     size_t i{0};
     int is{0};
-    while(_str[i] != '\0') {
+    while (_str[i] != '\0') {
         switch (_str[i]) {
             case '(':
-                is = open;
+                is = 0;
                 break;
             case ')':
-                is = close;
+                is = 1;
                 break;
             case '+':
-                is = plusm;
+                is = 2;
                 break;
             case '-':
-                is = plusm;
+                is = 2;
                 break;
             case '/':
-                is = multd;
+                is = 3;
                 break;
             case '*':
-                is = multd;
+                is = 3;
                 break;
             case ' ':
                 is = -2;

@@ -1,7 +1,8 @@
 //  Copyright 2020 GHA created by Klykov Anton
 
-#include <iostream>
 #include "postfix.h"
+
+#include <iostream>
 #include <string>
 
 int main() {
