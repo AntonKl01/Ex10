@@ -41,25 +41,22 @@ std::string infix2postfix(std::string _str) {
         }
         if (is == -1) {
             _fix.push_back(_str[i]);
-        } else if (_str[i] != ' ') {
-            if (_str[i] == '(') {
+        } else if (is != -2) {
+            if (is == 0) {
                 _fixStack.push(_str[i]);
                 _priorityStack.push(0);
             } else if (_fixStack.isEmpty()) {
-                if (_str[i] == ')') {
-                    _fixStack.push(_str[i]);
-                    _priorityStack.push(1);
-                } else if (_str[i] == '+' || _str[i] == '-') {
+                if (is == 2) {
                     _fixStack.push(_str[i]);
                     _priorityStack.push(2);
-                } else if (_str[i] == '*' || _str[i] == '/') {
+                } else if (is == 3) {
                     _fixStack.push(_str[i]);
                     _priorityStack.push(3);
                 }
             } else if (is > _priorityStack.get()) {
                 _fixStack.push(_str[i]);
                 _priorityStack.push(is);
-            } else if (_str[i] == ')') {
+            } else if (is == 1) {
                 while (_fixStack.get() != '(') {
                     _fix.push_back(_fixStack.pop());
                     _priorityStack.pop();
