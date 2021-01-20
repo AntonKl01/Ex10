@@ -7,8 +7,8 @@
 #include <string>
 
 std::string infix2postfix(std::string _str) {
-    MyStack<char> _fixStack;
-    MyStack<int> _priorityStack;
+    MyStack<char> _fixStack(_str.size());
+    MyStack<int> _priorityStack(_str.size());
     std::string _fix;
     size_t i{0};
     int is{0};
