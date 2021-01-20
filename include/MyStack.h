@@ -9,61 +9,69 @@ template<typename T>
 class MyStack {
  private:
     T* stack;
-    size_t length{0};
+    size_t length;
+    size_t top;
 
  public:
-    MyStack() {
-        stack = new T[0];
-    }
     ~MyStack() {
         delete[] stack;
         stack = nullptr;
     }
-    explicit MyStack(T _value) {
-        length++;
+    explicit MyStack(size_t _size) {
+        length = _size;
+        top = 0;
         stack = new T[length];
-        stack[length - 1] = _value;
     }
     MyStack(const MyStack& Stack) {
         length = Stack.length;
+        top = Stack.top;
         stack = new T[length];
         for (size_t i = 0; i < length; ++i) {
             stack[i] = Stack.stack[i];
         }
     }
     T get() const {
-        if (length != 0) {
-            return stack[length - 1];
+        if (!(*this).isEmpty()) {
+            return stack[top - 1];
         }
+        return 0;
     }
     T pop() {
-        T last = stack[length - 1];
-        length--;
-        T* _tempStack = new T[length];
-        for (int i = 0; i < length; ++i) {
-            _tempStack[i] = stack[i];
+        if (!(*this).isEmpty()) {
+            T last = stack[top - 1];
+            top--;
+            T* _tempStack = new T[top];
+            for (int i = 0; i < top; ++i) {
+                _tempStack[i] = stack[i];
+            }
+            delete[] stack;
+            stack = _tempStack;
+            _tempStack = nullptr;
+            return last;
         }
-        delete[] stack;
-        stack = _tempStack;
-        _tempStack = nullptr;
-        return last;
+        return 0;
     }
     void push(T _value) {
-        length++;
-        T* _tempStack = new T[length];
-        for (int i = 0; i < length - 1; ++i) {
-            _tempStack[i] = stack[i];
+        if (!(*this).isFull()) {
+            top++;
+            T* _tempStack = new T[top];
+            for (int i = 0; i < top - 1; ++i) {
+                _tempStack[i] = stack[i];
+            }
+            _tempStack[top - 1] = _value;
+            delete[] stack;
+            stack = _tempStack;
+            _tempStack = nullptr;
         }
-        _tempStack[length - 1] = _value;
-        delete[] stack;
-        stack = _tempStack;
-        _tempStack = nullptr;
     }
-    [[nodiscard]] size_t isFull() const {
-        return length;
+    [[nodiscard]] bool isFull() const {
+        if (length == top) {
+            return true;
+        }
+        return false;
     }
     [[nodiscard]] bool isEmpty() const {
-        if (length == 0) {
+        if (top == 0) {
             return true;
         } else {
             return false;
